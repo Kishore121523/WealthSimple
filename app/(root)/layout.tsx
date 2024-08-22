@@ -22,7 +22,7 @@ export default function RootLayout({
             height={30}
             alt="logo"
           />
-          <div className="">
+          <div>
             <MobileNav user={loggedIn}/>
           </div>
         </div>
