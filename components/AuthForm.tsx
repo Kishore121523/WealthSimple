@@ -16,15 +16,17 @@ const AuthForm = ({type}:{type:string}) => {
   const [user, setuser] = useState(null)
   const [isLoading, setIsdLoading] = useState(false)
 
-  const form = useForm<z.infer<typeof authFormSchema>>({
-    resolver: zodResolver(authFormSchema),
+  const formSchema = authFormSchema(type);
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
       password:""
     },
   })
 
-  function onSubmit(values: z.infer<typeof authFormSchema>) {
+  function onSubmit(values: z.infer<typeof formSchema>) {
     setIsdLoading(true)
     console.log(values)
     setIsdLoading(false)
@@ -61,6 +63,19 @@ const AuthForm = ({type}:{type:string}) => {
           <>
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+
+                {type === 'sign-up' && (
+                  <>
+                    <CustomInput control={form.control} name='firstName' label='First Name' placeholder='Enter your first name'/>
+                    <CustomInput control={form.control} name='lastName' label='Last Name' placeholder='Enter your last name'/>
+                    <CustomInput control={form.control} name='address1' label='Address' placeholder='Enter your address'/>
+                    <CustomInput control={form.control} name='state' label='State' placeholder='Example: NY'/>
+                    <CustomInput control={form.control} name='postalCode' label='Postal code' placeholder='Example: 11101'/>
+                    <CustomInput control={form.control} name='dateOfBirth' label='Date of Birth' placeholder='YYYY-MM-DD'/>
+                    <CustomInput control={form.control} name='ssn' label='SSN' placeholder='Example: 1234'/>
+                  </>
+                )}
+
                 <CustomInput control={form.control} name='email' label='Email' placeholder='Enter your email'/>
                 <CustomInput control={form.control} name='password' label='Password' placeholder='Enter your password'/>
 
