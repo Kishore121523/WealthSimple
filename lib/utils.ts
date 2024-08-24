@@ -198,18 +198,40 @@ export const getTransactionStatus = (date: Date) => {
 export const authFormSchema = (type: string) =>
   z.object({
     // sign up
-    firstName: type === "sign-in" ? z.string().optional() : z.string().min(3),
-    lastName: type === "sign-in" ? z.string().optional() : z.string().min(3),
-    address1: type === "sign-in" ? z.string().optional() : z.string().max(50),
-    city: type === "sign-in" ? z.string().optional() : z.string().max(50),
+    firstName:
+      type === "sign-in"
+        ? z.string().optional()
+        : z.string().min(3, "First name must be at least 3 characters long"),
+    lastName:
+      type === "sign-in"
+        ? z.string().optional()
+        : z.string().min(3, "Last name must be at least 3 characters long"),
+    address1:
+      type === "sign-in"
+        ? z.string().optional()
+        : z.string().max(50, "Address must be 50 characters or less"),
+    city:
+      type === "sign-in"
+        ? z.string().optional()
+        : z.string().max(50, "City name must be 50 characters or less"),
     state:
-      type === "sign-in" ? z.string().optional() : z.string().max(2).min(2),
+      type === "sign-in"
+        ? z.string().optional()
+        : z.string().length(2, "State must be a 2-letter abbreviation"),
     postalCode:
-      type === "sign-in" ? z.string().optional() : z.string().min(3).max(6),
-    dateOfBirth: type === "sign-in" ? z.string().optional() : z.string().min(3),
-    ssn: type === "sign-in" ? z.string().optional() : z.string().min(3),
+      type === "sign-in"
+        ? z.string().optional()
+        : z.string().min(5, "Postal code must be 5 characters long").max(6),
+    dateOfBirth:
+      type === "sign-in"
+        ? z.string().optional()
+        : z.string().min(3, "Date of Birth must be valid"),
+    ssn:
+      type === "sign-in"
+        ? z.string().optional()
+        : z.string().min(3, "SSN must be valid"),
 
     // both
-    email: z.string().email(),
-    password: z.string().min(8),
+    email: z.string().email("Email must be valid"),
+    password: z.string().min(8, "Password must be at least 8 characters long"),
   });
