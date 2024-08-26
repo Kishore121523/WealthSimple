@@ -12,8 +12,7 @@ import CustomInput from './CustomInput'
 import { authFormSchema } from '@/lib/utils'
 import { Loader2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { signUp } from '@/lib/actions/user.actions'
-import SignIn from '@/app/(auth)/sign-in/page'
+import { signIn, signUp } from '@/lib/actions/user.actions'
 import PlaidLink from './PlaidLink'
 
 const AuthForm = ({type}:{type:string}) => {
@@ -53,7 +52,7 @@ const AuthForm = ({type}:{type:string}) => {
         setuser(newUser);
       }
       if(type === 'sign-in'){
-        const response = await SignIn({
+        const response = await signIn({
           email:data.email,
           password:data.password
         })
@@ -65,7 +64,6 @@ const AuthForm = ({type}:{type:string}) => {
     } finally {
       setIsLoading(false)
     }
-
   }
 
   return (
