@@ -13,7 +13,7 @@ const ibmPlexSerif = IBM_Plex_Serif({
 
 
 export const metadata: Metadata = {
-  title: "Wealthwise",
+  title: "Wealthsimple",
   description: "A modern banking and finance management app for everyone",
   icons: {
     icon: '/icons/logo.svg'
